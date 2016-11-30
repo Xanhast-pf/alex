@@ -44,66 +44,40 @@ const actions = {
     send(request, response) {
         const { sessionId, context, entities } = request;
         const { text, quickreplies } = response;
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             console.log('Alex: ', JSON.stringify(response));
             return resolve();
         });
     },
-    // getForecast({ context, entities }) {
-    //     console.log('=================================================');
-    //     console.log('context : ', context);
-    //     console.log('entities : ', entities);
-    //     return new Promise((resolve, reject) => {
-    //         var location = firstEntityValue(entities, 'location');
-    //         console.log('LOCATION: ', location);
-    //         if (location) {
-    //             weather.find({ search: location, degreeType: 'C' }, (err, result) => {
-    //                 if (err) {
-    //                     context.forecast = 'Sorry I couldn\'t find it...';
-    //                 } else {
-    //                     context.forecast = `Location : ${ result[0].current.observationpoint } | Sky : ${ result[0].current.skytext } | Temperature : ${ result[0].current.temperature } C`;
-    //                 }
-    //             });
-    //
-    //             delete context.missingLocation;
-    //         } else {
-    //             context.missingLocation = true;
-    //             delete context.forecast;
-    //         }
-    //         console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-    //         return resolve(context);
-    //     });
-    // },
     getForecast({ context, entities }) {
-        console.log('=================================================');
-        console.log('context : ', context);
-        console.log('entities : ', entities);
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const location = firstEntityValue(entities, 'location');
             if (location) {
-                new Promise((resolve, reject) => {
+                new Promise((resolve) => {
                     weather.find({ search: location, degreeType: 'C' }, (err, result) => {
-                        const res = (err)
-                            ? 'Sorry I couldn\'t find it...'
-                            : `Location : ${ result[0].current.observationpoint } | Sky : ${ result[0].current.skytext } | Temperature : ${ result[0].current.temperature } C`;
-                        resolve(res);
+                        if (err) {
+                            return resolve('Sorry I couldn\'t find it...');
+                        } else {
+                            const res = result.map((args) => {
+                                return `Location : ${ args.current.observationpoint } | Sky : ${ args.current.skytext } | Temperature : ${ args.current.temperature } C`;
+                            });
+                            return resolve(res);
+                        }
                     });
                 }).then((val) => {
                     context.forecast = val;
                     delete context.missingLocation;
-                    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
                     return resolve(context);
                 });
             } else {
                 context.missingLocation = true;
                 delete context.forecast;
-                console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
                 return resolve(context);
             }
         });
     },
     Greet({ context, entities }) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const intent = firstEntityValue(entities, 'intent');
             if (intent === 'greetings') {
                 context.greetings = 'Greetings Master! It would be an honor to serve you today!';
@@ -114,7 +88,7 @@ const actions = {
         });
     },
     findTheater({ context, entities }) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const intent = firstEntityValue(entities, 'findTheater');
             const movie = firstEntityValue(entities, 'movie');
 
