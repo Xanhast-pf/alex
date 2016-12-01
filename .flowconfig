@@ -1,0 +1,8 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[options]
+module.name_mapper='^tools\/\(.*\)$' -> '<PROJECT_ROOT>/tools/\1'

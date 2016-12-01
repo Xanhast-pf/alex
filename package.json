@@ -14,12 +14,18 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/lib.js",
-    "start": "babel-node ./examples/quickstart.js"
+    "start": "babel-node ./examples/quickstart.js",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "flow-init": "flow init",
+    "flow-check": "flow check"
   },
   "repository": "https://github.com/wit-ai/node-wit",
   "author": "The Wit Team <help@wit.ai>",
   "dependencies": {
+    "@google/maps": "^0.3.0",
+    "babel-plugin-module-alias": "^1.6.0",
     "isomorphic-fetch": "^2.2.1",
+    "node-wit": "^4.2.0",
     "uuid": "^3.0.0",
     "weather-js": "^1.0.2"
   },
@@ -29,6 +35,7 @@
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-eslint": "^7.1.1",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
