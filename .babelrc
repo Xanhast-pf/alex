@@ -10,7 +10,8 @@
       [
           "module-alias",
           [
-              { "src": "./tools", "expose": "tools" }
+              { "src": "./src/tools", "expose": "tools" },
+              { "src": "./src/intelligence", "expose": "intelligence" }
           ]
       ]
    ]

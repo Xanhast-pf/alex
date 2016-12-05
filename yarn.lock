@@ -2517,10 +2517,6 @@ weather-js@^1.0.2:
     request "2.x"
     xml2js "0.4.x"
 
-weather-yahoo@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/weather-yahoo/-/weather-yahoo-1.0.2.tgz#e97dc1a3fcf90a9107fc28fcc55468c141d844b7"
-
 whatwg-fetch@>=0.10.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.1.tgz#078b9461bbe91cea73cbce8bb122a05f9e92b772"

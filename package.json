@@ -14,10 +14,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./tests/lib.js",
-    "start": "babel-node ./examples/quickstart.js",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "flow-init": "flow init",
-    "flow-check": "flow check"
+    "start": "babel-node ./src/entry.js",
+    "flow": "flow check"
   },
   "repository": "https://github.com/wit-ai/node-wit",
   "author": "The Wit Team <help@wit.ai>",
@@ -44,7 +42,6 @@
     "eslint-plugin-flowtype": "^2.28.2",
     "flow-bin": "^0.36.0",
     "mocha": "^3.1.2",
-    "sinon": "^1.17.6",
-    "weather-yahoo": "^1.0.2"
+    "sinon": "^1.17.6"
   }
 }

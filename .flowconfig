@@ -5,4 +5,5 @@
 [libs]
 
 [options]
-module.name_mapper='^tools\/\(.*\)$' -> '<PROJECT_ROOT>/tools/\1'
+module.name_mapper='^tools\/\(.*\)$' -> '<PROJECT_ROOT>/src/tools/\1'
+module.name_mapper='^intelligence\/\(.*\)$' -> '<PROJECT_ROOT>/src/intelligence/\1'
