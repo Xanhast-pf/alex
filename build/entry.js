@@ -1,5 +1,14 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.customActions = exports.actions = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+// import googleMapsClient from '@google/maps';
+
+
 var _firstEntityValue = require('./tools/firstEntityValue');
 
 var _firstEntityValue2 = _interopRequireDefault(_firstEntityValue);
@@ -16,7 +25,6 @@ var _nodeWit = require('node-wit');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import googleMapsClient from '@google/maps';
 var accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 
 // const key = 'AIzaSyC9Rg5wNEWEgQETU1odVqEERl49MRbPfWQ'; // Google Map API key
@@ -25,16 +33,8 @@ var accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 // Quickstart example
 // See https://wit.ai/ar7hur/quickstart
 
-var actions = {
-    send: function send(request, response) {
-        // const { sessionId, context, entities } = request;
-        // const { text, quickreplies } = response;
 
-        return new Promise(function (resolve) {
-            response.text && console.log('Alex: ', response.text);
-            return resolve();
-        });
-    },
+var customActions = {
     getForecast: function getForecast(_ref) {
         var context = _ref.context,
             entities = _ref.entities;
@@ -98,5 +98,22 @@ var actions = {
     }
 };
 
+exports.actions = actions;
+exports.customActions = customActions;
+
+
+var actions = _extends({
+    send: function send(request, response) {
+        // const { sessionId, context, entities } = request;
+        // const { text, quickreplies } = response;
+
+        return new Promise(function (resolve) {
+            response.text && console.log('Alex: ', response.text);
+            return resolve();
+        });
+    }
+}, customActions);
+
+// Test actions -> execute entry.js in console
 var client = new _nodeWit.Wit({ accessToken: accessToken, actions: actions });
 (0, _nodeWit.interactive)(client);

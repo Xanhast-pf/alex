@@ -1,5 +1,18 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // Messenger API integration example
+// We assume you have:
+// * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
+// * a Messenger Platform setup (https://developers.facebook.com/docs/messenger-platform/quickstart)
+// You need to `npm install` the following dependencies: body-parser, express, request.
+//
+// 1. npm install body-parser express request
+// 2. Download and install ngrok from https://ngrok.com/download
+// 3. ./ngrok http 8445
+// 4. WIT_TOKEN=your_access_token FB_APP_SECRET=your_app_secret FB_PAGE_TOKEN=your_page_token node examples/messenger.js
+// 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
+// 6. Talk to your bot on Messenger!
+
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -22,33 +35,22 @@ var _request2 = _interopRequireDefault(_request);
 
 var _nodeWit = require('node-wit');
 
+var _entry = require('./entry');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Webserver parameter
-// Messenger API integration example
-// We assume you have:
-// * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
-// * a Messenger Platform setup (https://developers.facebook.com/docs/messenger-platform/quickstart)
-// You need to `npm install` the following dependencies: body-parser, express, request.
-//
-// 1. npm install body-parser express request
-// 2. Download and install ngrok from https://ngrok.com/download
-// 3. ./ngrok http 8445
-// 4. WIT_TOKEN=your_access_token FB_APP_SECRET=your_app_secret FB_PAGE_TOKEN=your_page_token node examples/messenger.js
-// 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
-// 6. Talk to your bot on Messenger!
-
 var PORT = process.env.PORT || 8445;
 
 // Wit.ai parameters
-var WIT_TOKEN = process.env.WIT_TOKEN || '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN';
+var WIT_TOKEN = process.env.WIT_TOKEN;
 
 // Messenger API parameters
-var FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN || 'EAATdQ9r4SSMBAHo1gDI910vazZCSP2GhDVA4KKZCTxwRhMzUGxZC75VRXsCNJnjo4bWnAjAYKZCyNQ6XRssKw8t598KugXpPCN5PPtQhkrgVyqUZAlV7t2iWrUjZA26w7g2vY3SfHUxeOoBsZAtf3SBApwpmIGi1WlJissTdFcRhwZDZD';
+var FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
 if (!FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
 }
-var FB_APP_SECRET = process.env.FB_APP_SECRET || '167508c589a6eca1435fbb066ae1f082';
+var FB_APP_SECRET = process.env.FB_APP_SECRET;
 if (!FB_APP_SECRET) {
     throw new Error('missing FB_APP_SECRET');
 }
@@ -112,7 +114,7 @@ var findOrCreateSession = function findOrCreateSession(fbid) {
 };
 
 // Our bot actions
-var actions = {
+var actions = _extends({
     send: function send(_ref, _ref2) {
         var sessionId = _ref.sessionId;
         var text = _ref2.text;
@@ -135,10 +137,7 @@ var actions = {
             return Promise.resolve();
         }
     }
-    // You should implement your custom actions here
-    // See https://wit.ai/docs/quickstart
-
-};
+}, _entry.customActions);
 
 // Setting up our bot
 var wit = new _nodeWit.Wit({
