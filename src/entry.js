@@ -7,9 +7,9 @@ import GetForecast from 'intelligence/forecast';
 
 import ShowOffers from 'intelligence/showOffers';
 import type { Props as ShowOffersProps } from 'intelligence/showOffers';
-import { interactive, Wit } from 'node-wit';
-
-const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
+// import { interactive, Wit } from 'node-wit';
+//
+// const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 
 // const key = 'AIzaSyC9Rg5wNEWEgQETU1odVqEERl49MRbPfWQ'; // Google Map API key
 // googleMapsClient.createClient({ key });
@@ -67,11 +67,6 @@ const customActions = {
     }
 };
 
-export {
-    actions,
-    customActions
-};
-
 const actions = {
     send(request, response) {
         // const { sessionId, context, entities } = request;
@@ -85,6 +80,10 @@ const actions = {
     ...customActions
 };
 
-// Test actions -> execute entry.js in console
-const client = new Wit({ accessToken, actions });
-interactive(client);
+export {
+    actions,
+    customActions
+};
+// // Test actions -> execute entry.js in console
+// const client = new Wit({ accessToken, actions });
+// interactive(client);
