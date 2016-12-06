@@ -10,7 +10,7 @@ type Entity = {
     intent?: 'show_nearby_offers'
 };
 
-type Props = {
+export type Props = {
     context: ?Context,
     entities: Entity
 };

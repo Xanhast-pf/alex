@@ -1,8 +1,12 @@
 // @flow
 // import googleMapsClient from '@google/maps';
 import firstEntityValue from 'tools/firstEntityValue';
+
+import type { Props as GetForecastProps } from 'intelligence/forecast';
 import GetForecast from 'intelligence/forecast';
+
 import ShowOffers from 'intelligence/showOffers';
+import type { Props as ShowOffersProps } from 'intelligence/showOffers';
 import { interactive, Wit } from 'node-wit';
 
 const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
@@ -13,20 +17,12 @@ const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 // Quickstart example
 // See https://wit.ai/ar7hur/quickstart
 
-const actions = {
-    send(request, response) {
-        // const { sessionId, context, entities } = request;
-        // const { text, quickreplies } = response;
 
-        return new Promise((resolve) => {
-            response.text && console.log('Alex: ', response.text);
-            return resolve();
-        });
-    },
-    getForecast({ context, entities }) {
+const customActions = {
+    getForecast({ context, entities }: GetForecastProps) {
         return GetForecast({ context, entities });
     },
-    showOffers({ context, entities }) {
+    showOffers({ context, entities }: ShowOffersProps) {
         return ShowOffers({ context, entities });
     },
     Greet({ context, entities }) {
@@ -71,5 +67,24 @@ const actions = {
     }
 };
 
+export {
+    actions,
+    customActions
+};
+
+const actions = {
+    send(request, response) {
+        // const { sessionId, context, entities } = request;
+        // const { text, quickreplies } = response;
+
+        return new Promise((resolve) => {
+            response.text && console.log('Alex: ', response.text);
+            return resolve();
+        });
+    },
+    ...customActions
+};
+
+// Test actions -> execute entry.js in console
 const client = new Wit({ accessToken, actions });
 interactive(client);

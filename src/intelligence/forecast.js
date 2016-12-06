@@ -12,7 +12,7 @@ type Entity = {
     intent?: 'weather'
 };
 
-type Props = {
+export type Props = {
     context: ?Context,
     entities: Entity
 };

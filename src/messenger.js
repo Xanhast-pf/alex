@@ -17,19 +17,20 @@ import express from 'express';
 import fetch from 'node-fetch';
 import request from 'request';
 import { log, Wit } from 'node-wit';
+import { customActions } from './entry';
 
 // Webserver parameter
 const PORT = process.env.PORT || 8445;
 
 // Wit.ai parameters
-const WIT_TOKEN = process.env.WIT_TOKEN || '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN';
+const WIT_TOKEN = process.env.WIT_TOKEN;
 
 // Messenger API parameters
-const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN || 'EAATdQ9r4SSMBAHo1gDI910vazZCSP2GhDVA4KKZCTxwRhMzUGxZC75VRXsCNJnjo4bWnAjAYKZCyNQ6XRssKw8t598KugXpPCN5PPtQhkrgVyqUZAlV7t2iWrUjZA26w7g2vY3SfHUxeOoBsZAtf3SBApwpmIGi1WlJissTdFcRhwZDZD';
+const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
 if (!FB_PAGE_TOKEN) {
     throw new Error('missing FB_PAGE_TOKEN');
 }
-const FB_APP_SECRET = process.env.FB_APP_SECRET || '167508c589a6eca1435fbb066ae1f082';
+const FB_APP_SECRET = process.env.FB_APP_SECRET;
 if (!FB_APP_SECRET) {
     throw new Error('missing FB_APP_SECRET');
 }
@@ -117,9 +118,10 @@ const actions = {
       // Giving the wheel back to our bot
             return Promise.resolve();
         }
-    }
+    },
   // You should implement your custom actions here
   // See https://wit.ai/docs/quickstart
+    ...customActions
 };
 
 // Setting up our bot
@@ -177,32 +179,32 @@ app.post('/webhook', (req, res) => {
                         fbMessage(sender, 'Sorry I can only process text messages for now.')
             .catch(console.error);
                     } else if (text) {
-            // We received a text message
+                        // We received a text message
 
-            // Let's forward the message to the Wit.ai Bot Engine
-            // This will run all actions until our bot has nothing left to do
+                        // Let's forward the message to the Wit.ai Bot Engine
+                        // This will run all actions until our bot has nothing left to do
                         wit.runActions(
-              sessionId, // the user's current session
-              text, // the user's message
-              sessions[sessionId].context // the user's current session state
-            ).then((context) => {
-              // Our bot did everything it has to do.
-              // Now it's waiting for further messages to proceed.
-                console.log('Waiting for next user messages');
+                          sessionId, // the user's current session
+                          text, // the user's message
+                          sessions[sessionId].context // the user's current session state
+                        ).then((context) => {
+                          // Our bot did everything it has to do.
+                          // Now it's waiting for further messages to proceed.
+                            console.log('Waiting for next user messages');
 
-              // Based on the session state, you might want to reset the session.
-              // This depends heavily on the business logic of your bot.
-              // Example:
-              // if (context['done']) {
-              //   delete sessions[sessionId];
-              // }
+                          // Based on the session state, you might want to reset the session.
+                          // This depends heavily on the business logic of your bot.
+                          // Example:
+                          // if (context['done']) {
+                          //   delete sessions[sessionId];
+                          // }
 
-              // Updating the user's current session state
-                sessions[sessionId].context = context;
-            })
-            .catch((err) => {
-                console.error('Oops! Got an error from Wit: ', err.stack || err);
-            });
+                          // Updating the user's current session state
+                            sessions[sessionId].context = context;
+                        })
+                        .catch((err) => {
+                            console.error('Oops! Got an error from Wit: ', err.stack || err);
+                        });
                     }
                 } else {
                     console.log('received event', JSON.stringify(event));
