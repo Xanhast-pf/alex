@@ -14,7 +14,7 @@
   "main": "./src/messenger.js",
   "scripts": {
     "test": "mocha ./tests/lib.js",
-    "start": "babel-node ./src/entry.js",
+    "start": "babel-node ./src/messenger.js",
     "messenger": "babel-node ./src/messenger.js",
     "flow": "flow check"
   },
