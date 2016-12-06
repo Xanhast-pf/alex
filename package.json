@@ -15,6 +15,7 @@
   "scripts": {
     "start": "node ./build/messenger.js",
     "dev": "babel-node ./src/messenger.js",
+    "test": "babel-node ./src/entry.js",
     "flow": "flow check",
     "install": "npm run build",
     "build": "babel src/ --out-dir build/"

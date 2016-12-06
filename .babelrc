@@ -11,7 +11,8 @@
           "module-alias",
           [
               { "src": "./src/tools", "expose": "tools" },
-              { "src": "./src/intelligence", "expose": "intelligence" }
+              { "src": "./src/intelligence", "expose": "intelligence" },
+              { "src": "./config", "expose": "config" }
           ]
       ]
    ]

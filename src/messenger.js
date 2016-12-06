@@ -10,7 +10,7 @@
 // 4. WIT_TOKEN=your_access_token FB_APP_SECRET=your_app_secret FB_PAGE_TOKEN=your_page_token node examples/messenger.js
 // 5. Subscribe your page to the Webhooks using verify_token and `https://<your_ngrok_io>/webhook` as callback URL.
 // 6. Talk to your bot on Messenger!
-
+import { WIT_TOKEN, FB_APP_SECRET, PORT, FB_VERIFY_TOKEN } from 'config';
 import bodyParser from 'body-parser';
 import crypto from 'crypto';
 import express from 'express';
@@ -19,23 +19,6 @@ import request from 'request';
 import { log, Wit } from 'node-wit';
 import { customActions } from './entry';
 
-// Webserver parameter
-const PORT = process.env.PORT || 8445;
-
-// Wit.ai parameters
-const WIT_TOKEN = process.env.WIT_TOKEN;
-
-// Messenger API parameters
-const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
-if (!FB_PAGE_TOKEN) {
-    throw new Error('missing FB_PAGE_TOKEN');
-}
-const FB_APP_SECRET = process.env.FB_APP_SECRET;
-if (!FB_APP_SECRET) {
-    throw new Error('missing FB_APP_SECRET');
-}
-
-const FB_VERIFY_TOKEN = 'jogogoalex';
 // crypto.randomBytes(8, (err, buff) => {
 //     if (err) throw err;
 //     FB_VERIFY_TOKEN = buff.toString('hex');
@@ -47,26 +30,7 @@ const FB_VERIFY_TOKEN = 'jogogoalex';
 
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
-
-const fbMessage = (id, text) => {
-    const body = JSON.stringify({
-        recipient: { id },
-        message: { text }
-    });
-    const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
-    return fetch('https://graph.facebook.com/me/messages?' + qs, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body
-    })
-  .then(rsp => rsp.json())
-  .then((json) => {
-      if (json.error && json.error.message) {
-          throw new Error(json.error.message);
-      }
-      return json;
-  });
-};
+import { fbMessage } from 'tools/facebookMessage';
 
 // ----------------------------------------------------------------------------
 // Wit.ai bot specific code
@@ -104,15 +68,15 @@ const actions = {
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
             return fbMessage(recipientId, text)
-      .then(() => null)
-      .catch((err) => {
-          console.error(
-          'Oops! An error occurred while forwarding the response to',
-          recipientId,
-          ':',
-          err.stack || err
-        );
-      });
+              .then(() => null)
+              .catch((err) => {
+                  console.error(
+                  'Oops! An error occurred while forwarding the response to',
+                  recipientId,
+                  ':',
+                  err.stack || err
+                );
+              });
         } else {
             console.error('Oops! Couldn\'t find user for session:', sessionId);
       // Giving the wheel back to our bot
@@ -177,7 +141,7 @@ app.post('/webhook', (req, res) => {
             // We received an attachment
             // Let's reply with an automatic message
                         fbMessage(sender, 'Sorry I can only process text messages for now.')
-            .catch(console.error);
+                            .catch(console.error);
                     } else if (text) {
                         // We received a text message
 

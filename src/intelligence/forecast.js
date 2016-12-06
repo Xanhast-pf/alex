@@ -28,7 +28,8 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
                         return resolve('Sorry I couldn\'t find it...');
                     } else {
                         const res: string = result.map((args) => {
-                            return `Location : ${ args.current.observationpoint } | Sky : ${ args.current.skytext } | Temperature : ${ args.current.temperature } C`;
+                            // return `Location : ${ args.current.observationpoint } | Sky : ${ args.current.skytext } | Temperature : ${ args.current.temperature } C`;
+                            return args.current;
                         });
                         return resolve(res);
                     }

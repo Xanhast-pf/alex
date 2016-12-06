@@ -7,16 +7,11 @@ import GetForecast from 'intelligence/forecast';
 
 import ShowOffers from 'intelligence/showOffers';
 import type { Props as ShowOffersProps } from 'intelligence/showOffers';
-// import { interactive, Wit } from 'node-wit';
-//
-// const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
-
-// const key = 'AIzaSyC9Rg5wNEWEgQETU1odVqEERl49MRbPfWQ'; // Google Map API key
-// googleMapsClient.createClient({ key });
+import { interactive, Wit } from 'node-wit';
+const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 
 // Quickstart example
 // See https://wit.ai/ar7hur/quickstart
-
 
 const customActions = {
     getForecast({ context, entities }: GetForecastProps) {
@@ -73,7 +68,7 @@ const actions = {
         // const { text, quickreplies } = response;
 
         return new Promise((resolve) => {
-            response.text && console.log('Alex: ', response.text);
+            response && console.log('Alex: ', response);
             return resolve();
         });
     },
@@ -84,6 +79,6 @@ export {
     actions,
     customActions
 };
-// // Test actions -> execute entry.js in console
-// const client = new Wit({ accessToken, actions });
-// interactive(client);
+// Test actions -> execute entry.js in console
+const client = new Wit({ accessToken, actions });
+interactive(client);
