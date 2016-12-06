@@ -7,8 +7,8 @@ import GetForecast from 'intelligence/forecast';
 
 import ShowOffers from 'intelligence/showOffers';
 import type { Props as ShowOffersProps } from 'intelligence/showOffers';
-import { interactive, Wit } from 'node-wit';
-const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
+// import { interactive, Wit } from 'node-wit';
+// const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 
 // Quickstart example
 // See https://wit.ai/ar7hur/quickstart
@@ -79,6 +79,6 @@ export {
     actions,
     customActions
 };
-// Test actions -> execute entry.js in console
-const client = new Wit({ accessToken, actions });
-interactive(client);
+// // Test actions -> execute entry.js in console
+// const client = new Wit({ accessToken, actions });
+// interactive(client);
