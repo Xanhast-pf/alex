@@ -12,7 +12,7 @@
           [
               { "src": "./src/tools", "expose": "tools" },
               { "src": "./src/intelligence", "expose": "intelligence" },
-              { "src": "./config", "expose": "config" }
+              { "src": "./src/config", "expose": "config" }
           ]
       ]
    ]
