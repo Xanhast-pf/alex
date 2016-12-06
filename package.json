@@ -21,7 +21,6 @@
   "repository": "",
   "author": "xanhast",
   "dependencies": {
-    "@google/maps": "^0.3.0",
     "babel-plugin-module-alias": "^1.6.0",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
