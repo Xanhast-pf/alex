@@ -18,7 +18,7 @@
     "dev": "babel-node ./src/messenger.js",
     "messenger": "babel-node ./src/messenger.js",
     "flow": "flow check",
-    "install": "npm run build",
+    "install": "npm run build; ls node_modules",
     "build": "babel src/ --out-dir build/"
   },
   "repository": "",
