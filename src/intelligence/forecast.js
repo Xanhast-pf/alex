@@ -39,7 +39,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
             }).then((val) => {
                 context = {};
                 if (typeof val === 'string') {
-                    context.forecast = JSON.stringify(val);
+                    context.forecast = val;
                 } else {
                     const elements = val.map((args) => {
                         return {
