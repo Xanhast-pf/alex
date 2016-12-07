@@ -3,9 +3,10 @@ import { FB_PAGE_TOKEN } from 'config';
 import fetch from 'node-fetch';
 
 const fbMessage = (id: string, message: Object) => {
+    console.log('MESSAGE=========', message);
     const body = JSON.stringify({
         recipient: { id },
-        message: { ...message }
+        message
     });
 
     const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
