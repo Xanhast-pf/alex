@@ -55,15 +55,15 @@ const actions = {
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
             return fbMessage(recipientId, JSON.parse(text))
-              .then(() => null)
-              .catch((err) => {
-                  console.error(
-                  'Oops! An error occurred while forwarding the response: ', JSON.parse(text), ' to',
-                  recipientId,
-                  ':',
-                  err.stack || err
-                );
-              });
+                .then(() => null)
+                .catch((err) => {
+                    console.error(
+                        'Oops! An error occurred while forwarding the response: ', JSON.parse(text), ' to',
+                        recipientId,
+                        ':',
+                        err.stack || err
+                    );
+                });
         } else {
             console.error('Oops! Couldn\'t find user for session:', sessionId);
       // Giving the wheel back to our bot
@@ -86,7 +86,7 @@ const wit = new Wit({
 const app = express();
 app.use(({ method, url }, rsp, next) => {
     rsp.on('finish', () => {
-        console.log(`${rsp.statusCode} ${method} ${url}`);
+        console.log(`${ rsp.statusCode } ${ method } ${ url }`);
     });
     next();
 });
@@ -94,8 +94,7 @@ app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
 // Webhook setup
 app.get('/webhook', (req, res) => {
-    if (req.query['hub.mode'] === 'subscribe' &&
-    req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
+    if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
         res.send(req.query['hub.challenge']);
     } else {
         res.sendStatus(400);
@@ -127,7 +126,7 @@ app.post('/webhook', (req, res) => {
                     if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
-                        fbMessage(sender, 'Sorry I can only process text messages for now.')
+                        fbMessage(sender, { text: 'Sorry I can only process text messages for now.' })
                             .catch(console.error);
                     } else if (text) {
                         // We received a text message
@@ -135,9 +134,9 @@ app.post('/webhook', (req, res) => {
                         // Let's forward the message to the Wit.ai Bot Engine
                         // This will run all actions until our bot has nothing left to do
                         wit.runActions(
-                          sessionId, // the user's current session
-                          text, // the user's message
-                          sessions[sessionId].context // the user's current session state
+                            sessionId, // the user's current session
+                            text, // the user's message
+                            sessions[sessionId].context // the user's current session state
                         ).then((context) => {
                           // Our bot did everything it has to do.
                           // Now it's waiting for further messages to proceed.
