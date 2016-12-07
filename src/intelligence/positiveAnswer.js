@@ -21,10 +21,10 @@ const Greet = ({ context, entities }: Props): Promise<Context> => {
 
         if (sentiment === 'positive') {
             context = {};
-            context.sentiment = 'That makes me happy!';
+            context.sentiment = JSON.stringify({ text: 'That makes me happy!' });
         } else {
             context = {};
-            context.sentiment = 'I really don\'t know what to say...';
+            context.sentiment = JSON.stringify({ text: 'I really don\'t know what to say...' });
         }
         return resolve(context);
     });

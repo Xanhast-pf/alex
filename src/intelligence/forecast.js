@@ -4,6 +4,7 @@ import firstEntityValue from 'tools/firstEntityValue';
 
 type Context = {
     forecast?: string,
+    askLocation?: string,
     missingLocation?: boolean
 };
 
@@ -67,6 +68,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
         } else {
             context = {};
             context.missingLocation = true;
+            context.askLocation = JSON.stringify({ text: 'Can you tell me the location please?' });
             return resolve(context);
         }
     });
