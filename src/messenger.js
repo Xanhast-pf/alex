@@ -46,7 +46,7 @@ const findOrCreateSession = (fbid) => {
 
 // Our bot actions
 const actions = {
-    send({ sessionId, context }, { text }) {
+    send({ sessionId }, { text }) {
     // Our bot has something to say!
     // Let's retrieve the Facebook user whose session belongs to
         const recipientId = sessions[sessionId].fbid;
@@ -54,11 +54,11 @@ const actions = {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
-            return fbMessage(recipientId, context.text)
+            return fbMessage(recipientId, JSON.parse(text))
               .then(() => null)
               .catch((err) => {
                   console.error(
-                  'Oops! An error occurred while forwarding the response: ', context.text, ' to',
+                  'Oops! An error occurred while forwarding the response: ', JSON.parse(text), ' to',
                   recipientId,
                   ':',
                   err.stack || err

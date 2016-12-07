@@ -2,7 +2,7 @@
 import firstEntityValue from 'tools/firstEntityValue';
 
 type Context = {
-    greetings?: { text: string },
+    greetings?: string,
     quickreplies?: string
 };
 
@@ -20,7 +20,7 @@ const Greet = ({ context, entities }: Props): Promise<Context> => {
         const intent = firstEntityValue(entities, 'intent');
         if (intent === 'greetings') {
             context = {};
-            context.greetings = { text: 'Greetings Master! It would be an honor to serve you today!' };
+            context.greetings = JSON.stringify({ text: 'Greetings Master! It would be an honor to serve you today!' });
         } else {
             context = {};
         }
