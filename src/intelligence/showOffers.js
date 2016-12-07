@@ -22,7 +22,38 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
 
         if (intent === 'show_offers') { // Check for offers nearby by default
             context = {};
-            context.offers = JSON.stringify({ text: '[ 2 for 1 beer at Chez Serge | 50% off on pink hearted boxers at Sears | Bananas for free if you buy a computer at La Source ]' });
+            const elements = [
+                {
+                    title: 'Chez Serge',
+                    item_url: 'http://placehold.it/1024x1024',
+                    image_url: 'http://placehold.it/1024x1024',
+                    subtitle: '2 for 1 beer!'
+                },
+                {
+                    title: 'Sears',
+                    item_url: 'http://placehold.it/1024x1024',
+                    image_url: 'http://placehold.it/1024x1024',
+                    subtitle: '50% off on pink hearted boxers!'
+                },
+                {
+                    title: 'La Source',
+                    item_url: 'http://placehold.it/1024x1024',
+                    image_url: 'http://placehold.it/1024x1024',
+                    subtitle: 'Bananas for free if you buy a computer!'
+                }
+            ];
+
+            const offers = {
+                attachment: {
+                    type: 'template',
+                    payload: {
+                        template_type: 'generic',
+                        elements
+                    }
+                }
+            };
+
+            context.offers = JSON.stringify(offers);
         } else {
             context = {};
         }

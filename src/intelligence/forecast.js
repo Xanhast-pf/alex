@@ -29,11 +29,6 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
                         const error = JSON.stringify({ text: 'Sorry I couldn\'t find it...' });
                         return resolve(error);
                     } else {
-                        // const res: Object = result.map((args) => {
-                        //     // return `Location : ${ args.current.observationpoint } | Sky : ${ args.current.skytext } | Temperature : ${ args.current.temperature } C`;
-                        //     return args.current;
-                        // });
-
                         return resolve(result);
                     }
                 });
