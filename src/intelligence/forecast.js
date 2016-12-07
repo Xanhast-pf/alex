@@ -44,7 +44,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
                     const elements = val.map((args) => {
                         return {
                             title: args.current.observationpoint,
-                            item_url: '#',
+                            item_url: args.current.imageUrl,
                             image_url: args.current.imageUrl,
                             subtitle: args.current.skytext
                         };
