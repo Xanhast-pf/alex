@@ -42,7 +42,8 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
                             title: args.current.observationpoint,
                             item_url: args.current.imageUrl,
                             image_url: args.current.imageUrl,
-                            subtitle: args.current.skytext
+                            subtitle: `Weather: ${ args.current.skytext },
+                            Temperature: ${ args.current.temperature }°C`
                         };
                     });
 
