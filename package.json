@@ -1,7 +1,7 @@
 {
   "name": "Alex",
   "version": "1.0.0",
-  "description": "Wit.ai Node.js SDK",
+  "description": "This is a bot for messenger",
   "keywords": [
     "wit",
     "wit.ai",
@@ -20,15 +20,15 @@
     "install": "npm run build",
     "build": "babel src/ --out-dir build/"
   },
-  "repository": "",
+  "repository": "https://github.com/Xanhast-pf/alex.git",
   "author": "xanhast",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.2",
+    "node-fetch": "^1.6.3",
     "node-wit": "^4.2.0",
-    "request": "^2.79.0",
     "uuid": "^3.0.0",
     "weather-js": "^1.0.2"
   },

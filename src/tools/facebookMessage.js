@@ -1,7 +1,8 @@
 // @flow
 import { FB_PAGE_TOKEN } from 'config';
+import fetch from 'node-fetch';
 
-const fbMessage = (id, text) => {
+const fbMessage = (id: string, text: string) => {
     const body = JSON.stringify({
         recipient: { id },
         message: { text }

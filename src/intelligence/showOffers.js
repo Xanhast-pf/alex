@@ -2,7 +2,8 @@
 import firstEntityValue from 'tools/firstEntityValue';
 
 type Context = {
-    offers?: string
+    offers?: string,
+    quickreplies?: string
 };
 
 type Entity = {
