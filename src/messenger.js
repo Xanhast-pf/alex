@@ -58,7 +58,7 @@ const actions = {
               .then(() => null)
               .catch((err) => {
                   console.error(
-                  'Oops! An error occurred while forwarding the response to',
+                  'Oops! An error occurred while forwarding the response: ', text, ' to',
                   recipientId,
                   ':',
                   err.stack || err
