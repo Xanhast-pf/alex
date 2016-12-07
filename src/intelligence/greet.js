@@ -20,7 +20,7 @@ const Greet = ({ context, entities }: Props): Promise<Context> => {
         const intent = firstEntityValue(entities, 'intent');
         if (intent === 'greetings') {
             context = {};
-            context.greetings = JSON.stringify({ text: 'Greetings Master! It would be an honor to serve you today!' });
+            context.greetings = JSON.stringify({ text: 'Greetings Master {{user_first_name}}! It would be an honor to serve you today!' });
         } else {
             context = {};
         }
