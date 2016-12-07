@@ -3,7 +3,7 @@ import weather from 'weather-js';
 import firstEntityValue from 'tools/firstEntityValue';
 
 type Context = {
-    forecast?: Object,
+    forecast?: string,
     missingLocation?: boolean
 };
 
@@ -25,18 +25,43 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
             new Promise((resolve) => {
                 weather.find({ search: location, degreeType: 'C' }, (err, result) => {
                     if (err) {
-                        return resolve({ error: 'Sorry I couldn\'t find it...' });
+                        const error = JSON.stringify({ text: 'Sorry I couldn\'t find it...' });
+                        return resolve(error);
                     } else {
-                        const res: Object = result.map((args) => {
-                            // return `Location : ${ args.current.observationpoint } | Sky : ${ args.current.skytext } | Temperature : ${ args.current.temperature } C`;
-                            return args.current;
-                        });
-                        return resolve(res);
+                        // const res: Object = result.map((args) => {
+                        //     // return `Location : ${ args.current.observationpoint } | Sky : ${ args.current.skytext } | Temperature : ${ args.current.temperature } C`;
+                        //     return args.current;
+                        // });
+
+                        return resolve(result);
                     }
                 });
             }).then((val) => {
                 context = {};
-                context.forecast = val;
+                if (typeof val === 'string') {
+                    context.forecast = JSON.stringify(val);
+                } else {
+                    const elements = val.map((args) => {
+                        return {
+                            title: args.current.observationpoint,
+                            item_url: '#',
+                            image_url: args.current.imageUrl,
+                            subtitle: args.current.skytext
+                        };
+                    });
+
+                    const format = {
+                        attachment: {
+                            type: 'template',
+                            payload: {
+                                template_type: 'generic',
+                                elements
+                            }
+                        }
+                    };
+                    context.forecast = JSON.stringify(format);
+                }
+
                 return resolve(context);
             });
         } else {
