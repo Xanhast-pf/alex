@@ -42,8 +42,6 @@ const actions = {
     send(request: Request, response: Response) {
         return new Promise((resolve) => {
             response.text && console.log('Alex: ', response.text);
-            request.context && console.log('Alex: ', request.context);
-
             return resolve();
         });
     },

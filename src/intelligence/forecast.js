@@ -27,7 +27,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
             new Promise((resolve) => {
                 weather.find({ search: location, degreeType: 'C' }, (err, result) => {
                     if (err) {
-                        const error = textMessage('Sorry I couldn\'t find it...');
+                        const error = textMessage('Sorry I couldn\'t find forecast for this location... Can you tell me the location again please?');
                         return resolve(error);
                     } else {
                         return resolve(result);
@@ -35,7 +35,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
                 });
             }).then((val) => {
                 context = {};
-                if (typeof val === 'string') {
+                if (typeof val === 'string' || context.missingLocation) {
                     context.forecast = val;
                 } else {
                     const elements = val.map((args) => {
@@ -62,7 +62,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
         } else {
             context = {};
             context.missingLocation = true;
-            context.askLocation = JSON.stringify({ text: 'Can you tell me the location please?' });
+            context.askLocation = textMessage('Can you tell me the location please?');
             return resolve(context);
         }
     });

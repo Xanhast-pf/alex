@@ -26,21 +26,21 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
             const elements = [
                 {
                     title: 'Chez Serge',
-                    item_url: 'http://placehold.it/1024x1024',
-                    image_url: 'http://placehold.it/1024x1024',
+                    item_url: 'https://s3.amazonaws.com/jogogo-static-file/chezserge/en-CA/assets/images/bgHeaderNoTxt.jpg',
+                    image_url: 'imageUrl": "https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/fullscreenSilverPrize.jpg',
                     subtitle: '2 for 1 beer!'
                 },
                 {
-                    title: 'Sears',
-                    item_url: 'http://placehold.it/1024x1024',
-                    image_url: 'http://placehold.it/1024x1024',
-                    subtitle: '50% off on pink hearted boxers!'
+                    title: 'Studio M & W',
+                    item_url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg',
+                    image_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/fullscreenSilverPrize.jpg',
+                    subtitle: 'Shave your head for free!'
                 },
                 {
-                    title: 'La Source',
-                    item_url: 'http://placehold.it/1024x1024',
-                    image_url: 'http://placehold.it/1024x1024',
-                    subtitle: 'Bananas for free if you buy a computer!'
+                    title: 'Burger Crise Cardiaque',
+                    item_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
+                    image_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
+                    subtitle: 'Bananas for free if you buy and finish a QuadraBurger!'
                 }
             ];
 
