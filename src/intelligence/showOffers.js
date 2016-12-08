@@ -27,7 +27,7 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
                 {
                     title: 'Chez Serge',
                     item_url: 'https://s3.amazonaws.com/jogogo-static-file/chezserge/en-CA/assets/images/bgHeaderNoTxt.jpg',
-                    image_url: 'imageUrl": "https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/fullscreenSilverPrize.jpg',
+                    image_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/fullscreenSilverPrize.jpg',
                     subtitle: '2 for 1 beer!'
                 },
                 {
