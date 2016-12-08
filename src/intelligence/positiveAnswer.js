@@ -1,5 +1,6 @@
 // @flow
 import firstEntityValue from 'tools/firstEntityValue';
+import { textMessage } from 'tools/formatMessage';
 
 type Context = {
     sentiment?: string,
@@ -21,10 +22,10 @@ const Greet = ({ context, entities }: Props): Promise<Context> => {
 
         if (sentiment === 'positive') {
             context = {};
-            context.sentiment = JSON.stringify({ text: 'That makes me happy!' });
+            context.sentiment = textMessage('That makes me happy!');
         } else {
             context = {};
-            context.sentiment = JSON.stringify({ text: 'I really don\'t know what to say...' });
+            context.sentiment = textMessage('I really don\'t know what to say...');
         }
         return resolve(context);
     });

@@ -1,6 +1,7 @@
 // @flow
 import weather from 'weather-js';
 import firstEntityValue from 'tools/firstEntityValue';
+import { textMessage, listTemplate } from 'tools/formatMessage';
 
 type Context = {
     forecast?: string,
@@ -26,7 +27,7 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
             new Promise((resolve) => {
                 weather.find({ search: location, degreeType: 'C' }, (err, result) => {
                     if (err) {
-                        const error = JSON.stringify({ text: 'Sorry I couldn\'t find it...' });
+                        const error = textMessage('Sorry I couldn\'t find it...');
                         return resolve(error);
                     } else {
                         return resolve(result);
@@ -42,20 +43,18 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
                             title: args.current.observationpoint,
                             item_url: args.current.imageUrl,
                             image_url: args.current.imageUrl,
-                            subtitle: `Weather: ${ args.current.skytext }, Temperature: ${ args.current.temperature }°C`
+                            subtitle: `Weather: ${ args.current.skytext }, Temperature: ${ args.current.temperature }°C`,
+                            buttons: [
+                                {
+                                    title: 'View',
+                                    type: 'web_url',
+                                    url: args.current.imageUrl
+                                }
+                            ]
                         };
                     });
 
-                    const format = {
-                        attachment: {
-                            type: 'template',
-                            payload: {
-                                template_type: 'generic',
-                                elements
-                            }
-                        }
-                    };
-                    context.forecast = JSON.stringify(format);
+                    context.forecast = listTemplate(elements);
                 }
 
                 return resolve(context);

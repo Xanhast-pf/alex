@@ -11,7 +11,6 @@ import PositiveAnswer from 'intelligence/positiveAnswer';
 import ShowOffers from 'intelligence/showOffers';
 import type { Props as ShowOffersProps } from 'intelligence/showOffers';
 // import { interactive, Wit } from 'node-wit';
-// const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 
 const customActions = {
     getForecast({ context, entities }: GetForecastProps) {
@@ -41,9 +40,6 @@ type Response = {
 
 const actions = {
     send(request: Request, response: Response) {
-        // const { sessionId, context, entities } = request;
-        // const { text, quickreplies } = response;
-
         return new Promise((resolve) => {
             response.text && console.log('Alex: ', response.text);
             request.context && console.log('Alex: ', request.context);
@@ -59,5 +55,6 @@ export {
     customActions
 };
 // // Test actions -> execute actions.js in console
+// const accessToken = '4737MR7N7PQAEAXHGHPBDGCWNC6LUCKN'; // ALEX
 // const client = new Wit({ accessToken, actions });
 // interactive(client);

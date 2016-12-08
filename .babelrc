@@ -12,7 +12,8 @@
           [
               { "src": "./src/tools", "expose": "tools" },
               { "src": "./src/intelligence", "expose": "intelligence" },
-              { "src": "./src/config", "expose": "config" }
+              { "src": "./src/config", "expose": "config" },
+              { "src": "./src/types", "expose": "types" }
           ]
       ]
    ]

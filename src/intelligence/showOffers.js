@@ -1,5 +1,6 @@
 // @flow
 import firstEntityValue from 'tools/firstEntityValue';
+import { listTemplate } from 'tools/formatMessage';
 
 type Context = {
     offers?: string,
@@ -43,17 +44,7 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
                 }
             ];
 
-            const offers = {
-                attachment: {
-                    type: 'template',
-                    payload: {
-                        template_type: 'generic',
-                        elements
-                    }
-                }
-            };
-
-            context.offers = JSON.stringify(offers);
+            context.offers = listTemplate(elements);
         } else {
             context = {};
         }
