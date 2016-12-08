@@ -1,6 +1,7 @@
 // @flow
 import firstEntityValue from 'tools/firstEntityValue';
 import { listTemplate } from 'tools/formatMessage';
+import type { Element } from 'types';
 
 type Context = {
     offers?: string,
@@ -23,24 +24,50 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
 
         if (intent === 'show_offers') { // Check for offers nearby by default
             context = {};
-            const elements = [
+            const elements: Array<Element> = [
                 {
                     title: 'Chez Serge',
                     item_url: 'https://s3.amazonaws.com/jogogo-static-file/chezserge/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     image_url: 'https://s3.amazonaws.com/jogogo-static-file/chezserge/en-CA/assets/images/bgHeaderNoTxt.jpg',
-                    subtitle: '2 for 1 beer!'
+                    subtitle: '2 for 1 beer!',
+                    buttons: [
+                        {
+                            title: 'View Offer',
+                            type: 'web_url',
+                            url: 'https://s3.amazonaws.com/jogogo-static-file/chezserge/en-CA/assets/images/bgHeaderNoTxt.jpg'
+                        }
+                    ]
                 },
                 {
                     title: 'Studio M & W',
                     item_url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     image_url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg',
-                    subtitle: 'Shave your head for free!'
+                    subtitle: 'Shave your head for free!',
+                    buttons: [
+                        {
+                            title: 'View Offer',
+                            type: 'web_url',
+                            url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg'
+                        }
+                    ]
                 },
                 {
                     title: 'Burger Crise Cardiaque',
                     item_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     image_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
-                    subtitle: 'Bananas for free if you buy and finish a QuadraBurger!'
+                    subtitle: 'Bananas for free if you buy and finish a QuadraBurger!',
+                    buttons: [
+                        {
+                            title: 'View Offer',
+                            type: 'web_url',
+                            url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg'
+                        },
+                        {
+                            title: 'View Offer',
+                            type: 'web_url',
+                            url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg'
+                        }
+                    ]
                 }
             ];
 
