@@ -45,23 +45,18 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
                     subtitle: 'Shave your head for free!',
                     buttons: [
                         {
-                            title: 'View Offer',
+                            title: 'Make me bald Please',
                             type: 'web_url',
                             url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg'
                         }
                     ]
                 },
                 {
-                    title: 'Burger Crise Cardiaque',
+                    title: '12345678901234567890123456789012345678901234567890123456789012345678901234567890KKKK',
                     item_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     image_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     subtitle: 'Bananas for free if you buy and finish a QuadraBurger!',
                     buttons: [
-                        {
-                            title: 'View Offer',
-                            type: 'web_url',
-                            url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg'
-                        },
                         {
                             title: 'View Offer',
                             type: 'web_url',

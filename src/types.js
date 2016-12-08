@@ -11,7 +11,7 @@ export type GenericTemplatePayload = {
     elements: Array<Element> // Limited to 10
 };
 
-// List Template
+// LIST TEMPLATE
 export type ListTemplate = {
     type: 'template',
     payload: ListTemplatePayload
@@ -24,13 +24,25 @@ export type ListTemplatePayload = {
     buttons?: Array<Buttons> // List of buttons associated on the list template message (maximum of 1 button).
 };
 
+// BUTTON TEMPLATE
+export type ButtonTemplate = {
+    type: 'template',
+    payload: ButtonTemplatePayload
+};
+
+export type ButtonTemplatePayload = {
+    template_type: 'button',
+    text: string, // Limited to 640 chars max
+    buttons: Array<Buttons> // Limited to 3
+};
+
 // Element to be inserted in generic templates
 export type Element = {
     title: string, // 80 chars max.
     item_url?: string, // URL that is opened when bubble is tapped
     default_action?: UrlButton, // Default action to be triggered when user taps on the element
     image_url: string, // Bubble image
-    subtitle: string, // Bubble subtitle
+    subtitle: string, // Bubble subtitle 80 chars max
     buttons?: Array<Buttons> // Set of buttons that appear as call-to-actions. Limited to 3
 };
 
@@ -39,7 +51,7 @@ export type Buttons = UrlButton | PostbackButton | ShareButton | BuyButton | Log
 //  Post back Button
 export type PostbackButton = {
     type: 'post_back',
-    title: string,
+    title: string, // 20 chars limit
     payload: string // 1000 chars max
 };
 
@@ -78,7 +90,7 @@ export type PaymentSummary = {
 
 export type BuyButton = {
     type: 'payment',
-    title: 'buy',
+    title: 'buy' | string,
     payload: string, // Developer defined metadata about the purchase.
     payment_summary: PaymentSummary
 };
