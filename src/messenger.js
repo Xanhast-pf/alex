@@ -126,7 +126,16 @@ app.post('/webhook', (req, res) => {
                     if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
+                        fbTyping(sender, 'mark_seen')
+                            .then(() => console.log('mark_seen'))
+                            .catch(console.error);
+                        fbTyping(sender, 'typing_on')
+                            .then(() => console.log('typing_on'))
+                            .catch(console.error);
                         fbMessage(sender, { text: 'Sorry I can only process text messages for now.' })
+                            .catch(console.error);
+                        fbTyping(sender, 'typing_off')
+                            .then(() => console.log('typing_off'))
                             .catch(console.error);
                     } else if (text) {
                         // We received a text message
