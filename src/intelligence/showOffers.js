@@ -32,7 +32,7 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
                     subtitle: '2 for 1 beer!',
                     buttons: [
                         {
-                            title: 'View Offer',
+                            title: 'Get drunk',
                             type: 'web_url',
                             url: 'https://s3.amazonaws.com/jogogo-static-file/chezserge/en-CA/assets/images/bgHeaderNoTxt.jpg'
                         }
@@ -45,20 +45,20 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
                     subtitle: 'Shave your head for free!',
                     buttons: [
                         {
-                            title: 'Make me bald Please Master!',
+                            title: 'Make me bald',
                             type: 'web_url',
                             url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg'
                         }
                     ]
                 },
                 {
-                    title: '12345678901234567890123456789012345678901234567890123456789012345678901234567890KKKK',
+                    title: 'Burger Bar Crescent',
                     item_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     image_url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg',
                     subtitle: 'Bananas for free if you buy and finish a QuadraBurger!',
                     buttons: [
                         {
-                            title: 'View Offer',
+                            title: 'Get bananas',
                             type: 'web_url',
                             url: 'https://s3.amazonaws.com/jogogo-static-file/corona/en-CA/assets/images/bgHeaderNoTxt.jpg'
                         }
