@@ -57,12 +57,16 @@ const get3Buttons = (element: Element) => {
     if (element.buttons && element.buttons.length > 3) {
         element.buttons = element.buttons.slice(0, 3);
     }
+
+    formatButtonTitle(element);
 };
 
 const get1Button = (element: Element) => {
     if (element.buttons && element.buttons.length > 1) {
         element.buttons = element.buttons.slice(0, 1);
     }
+
+    formatButtonTitle(element);
 };
 
 const formatTitle = (element: Element) => {
@@ -71,6 +75,18 @@ const formatTitle = (element: Element) => {
 
 const formatSubTitle = (element: Element) => {
     if (element.subtitle.length > 80) element.subtitle = element.subtitle.slice(0, 80);
+};
+
+const formatButtonTitle = (element: Element) => {
+    if (element.buttons) {
+        element.buttons.map((args) => {
+            if (args.type === 'post_back' || args.type === 'web_url') {
+                if (args.title.length > 20) {
+                    args.title = args.title.slice(0, 20);
+                }
+            }
+        });
+    }
 };
 
 export {

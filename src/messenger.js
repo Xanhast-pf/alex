@@ -17,7 +17,7 @@ import { customActions } from './actions';
 
 // See the Send API reference
 // https://developers.facebook.com/docs/messenger-platform/send-api-reference
-import { fbMessage } from 'tools/facebookMessage';
+import { fbMessage, fbTyping } from 'tools/facebookMessage';
 
 // ----------------------------------------------------------------------------
 // Wit.ai bot specific code
@@ -133,6 +133,7 @@ app.post('/webhook', (req, res) => {
 
                         // Let's forward the message to the Wit.ai Bot Engine
                         // This will run all actions until our bot has nothing left to do
+                        fbTyping(sender, 'typing_on');
                         wit.runActions(
                             sessionId, // the user's current session
                             text, // the user's message
@@ -151,6 +152,7 @@ app.post('/webhook', (req, res) => {
 
                           // Updating the user's current session state
                             sessions[sessionId].context = context;
+                            fbTyping(sender, 'typing_off');
                         })
                         .catch((err) => {
                             console.error('Oops! Got an error from Wit: ', err.stack || err);

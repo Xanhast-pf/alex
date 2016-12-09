@@ -24,6 +24,29 @@ const fbMessage = (id: string, message: Object) => {
       });
 };
 
+const fbTyping = (id: string, senderAction: 'typing_on' | 'typing_off') => {
+    const body = JSON.stringify({
+        recipient: { id },
+        sender_action: senderAction
+    });
+
+    const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+
+    return fetch('https://graph.facebook.com/me/messages?' + qs, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body
+    })
+      .then(rsp => rsp.json())
+      .then((json) => {
+          if (json.error && json.error.message) {
+              throw new Error(json.error.message);
+          }
+          return json;
+      });
+};
+
 export {
-    fbMessage
+    fbMessage,
+    fbTyping
 };

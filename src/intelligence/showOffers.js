@@ -45,7 +45,7 @@ const ShowOffers = ({ context, entities }: Props): Promise<Context> => {
                     subtitle: 'Shave your head for free!',
                     buttons: [
                         {
-                            title: 'Make me bald Please',
+                            title: 'Make me bald Please Master!',
                             type: 'web_url',
                             url: 'https://s3.amazonaws.com/jogogo-static-file/mwstudio/en-CA/assets/images/bgHeaderNoTxt.jpg'
                         }
