@@ -54,9 +54,10 @@ const actions = {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
-            fbTyping(recipientId, 'typing_on');
+            fbTyping(recipientId, 'mark_seen')
+                .then(() => fbTyping(recipientId, 'typing_on'));
             return fbMessage(recipientId, JSON.parse(text))
-                .then(() => fbTyping(recipientId, 'typing_off'))
+                .then(() => null)
                 .catch((err) => {
                     console.error(
                         'Oops! An error occurred while forwarding the response: ', JSON.parse(text), ' to',

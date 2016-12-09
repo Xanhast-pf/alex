@@ -24,7 +24,7 @@ const fbMessage = (id: string, message: Object) => {
       });
 };
 
-type SenderAction = 'typing_on' | 'typing_off';
+type SenderAction = 'mark_seen' | 'typing_on' | 'typing_off';
 
 const fbTyping = (id: string, senderAction: SenderAction) => {
     const body = JSON.stringify({
