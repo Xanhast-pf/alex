@@ -131,8 +131,10 @@ app.post('/webhook', (req, res) => {
                     } else if (text) {
                         // We received a text message
                         fbTyping(sender, 'mark_seen')
+                            .then(() => console.log('mark_seen'))
                             .catch(console.error);
                         fbTyping(sender, 'typing_on')
+                            .then(() => console.log('typing_on'))
                             .catch(console.error);
                         // Let's forward the message to the Wit.ai Bot Engine
                         // This will run all actions until our bot has nothing left to do
@@ -142,6 +144,7 @@ app.post('/webhook', (req, res) => {
                             sessions[sessionId].context // the user's current session state
                         ).then((context) => {
                             fbTyping(sender, 'typing_off')
+                                .then(() => console.log('typing_off'))
                                 .catch(console.error);
                           // Our bot did everything it has to do.
                           // Now it's waiting for further messages to proceed.

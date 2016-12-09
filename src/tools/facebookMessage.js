@@ -10,7 +10,7 @@ const fbMessage = (id: string, message: Object) => {
 
     const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
 
-    return fetch('https://graph.facebook.com/me/messages?' + qs, {
+    return fetch('https://graph.facebook.com/v2.6/me/messages?' + qs, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body
@@ -27,7 +27,6 @@ const fbMessage = (id: string, message: Object) => {
 type SenderAction = 'mark_seen' | 'typing_on' | 'typing_off';
 
 const fbTyping = (id: string, senderAction: SenderAction) => {
-    console.log('TYPING', senderAction);
     const body = JSON.stringify({
         recipient: { id },
         sender_action: senderAction
