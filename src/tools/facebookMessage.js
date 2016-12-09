@@ -35,7 +35,7 @@ const fbTyping = (id: string, senderAction: SenderAction) => {
 
     const qs = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
 
-    return fetch('https://graph.facebook.com/me/messages?' + qs, {
+    return fetch('https://graph.facebook.com/v2.6/me/messages?' + qs, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body
