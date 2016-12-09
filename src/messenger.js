@@ -54,8 +54,6 @@ const actions = {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
-            fbTyping(recipientId, 'mark_seen')
-                .then(() => fbTyping(recipientId, 'typing_on'));
             return fbMessage(recipientId, JSON.parse(text))
                 .then(() => null)
                 .catch((err) => {
@@ -132,7 +130,10 @@ app.post('/webhook', (req, res) => {
                             .catch(console.error);
                     } else if (text) {
                         // We received a text message
-
+                        fbTyping(sender, 'mark_seen')
+                            .catch(console.error);
+                        fbTyping(sender, 'typing_on')
+                            .catch(console.error);
                         // Let's forward the message to the Wit.ai Bot Engine
                         // This will run all actions until our bot has nothing left to do
                         wit.runActions(
@@ -140,6 +141,8 @@ app.post('/webhook', (req, res) => {
                             text, // the user's message
                             sessions[sessionId].context // the user's current session state
                         ).then((context) => {
+                            fbTyping(sender, 'typing_off')
+                                .catch(console.error);
                           // Our bot did everything it has to do.
                           // Now it's waiting for further messages to proceed.
                             console.log('Waiting for next user messages');
