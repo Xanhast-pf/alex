@@ -126,14 +126,30 @@ app.post('/webhook', (req, res) => {
                     if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
+                        // const oui = [{
+                        //     title: 'Jonathan\'s Location',
+                        //     url: 'ui',
+                        //     type: 'location',
+                        //     payload: {
+                        //         coordinates: {
+                        //             lat: 45.525984,
+                        //             long: -73.595397
+                        //         }
+                        //     }
+                        // }];
+
+                        attachments.map((args) => {
+                            if (args.type === 'location') {
+                                fbMessage(sender, JSON.stringify(args.payload.coordinates));
+                                fbMessage(sender, JSON.stringify(event.message.quick_reply.payload));
+                            }
+                        });
 
                         fbTyping(sender, 'mark_seen')
                             .catch(console.error);
                         fbTyping(sender, 'typing_on')
                             .catch(console.error);
 
-                        fbMessage(sender, { text: JSON.stringify(attachments) })
-                            .catch(console.error);
                         fbMessage(sender, { text: 'Sorry I can only process text messages for now.' })
                             .catch(console.error);
 
