@@ -126,6 +126,7 @@ app.post('/webhook', (req, res) => {
                     if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
+                        console.log('ATTACHMENT', attachments);
                         fbTyping(sender, 'mark_seen')
                             .catch(console.error);
                         fbTyping(sender, 'typing_on')
