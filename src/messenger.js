@@ -138,13 +138,6 @@ app.post('/webhook', (req, res) => {
                         //     }
                         // }];
 
-                        attachments.map((args) => {
-                            if (args.type === 'location') {
-                                fbMessage(sender, JSON.stringify(args.payload.coordinates));
-                                fbMessage(sender, JSON.stringify(event.message.quick_reply.payload));
-                            }
-                        });
-
                         fbTyping(sender, 'mark_seen')
                             .catch(console.error);
                         fbTyping(sender, 'typing_on')
@@ -186,6 +179,13 @@ app.post('/webhook', (req, res) => {
                         })
                         .catch((err) => {
                             console.error('Oops! Got an error from Wit: ', err.stack || err);
+                        });
+                    } else if (attachments && text) {
+                        attachments.map((args) => {
+                            if (args.type === 'location') {
+                                fbMessage(sender, JSON.stringify(args.payload.coordinates));
+                                fbMessage(sender, JSON.stringify(event));
+                            }
                         });
                     }
                 } else {
