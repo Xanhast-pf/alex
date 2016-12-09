@@ -27,6 +27,7 @@ const fbMessage = (id: string, message: Object) => {
 type SenderAction = 'mark_seen' | 'typing_on' | 'typing_off';
 
 const fbTyping = (id: string, senderAction: SenderAction) => {
+    console.log('TYPING', senderAction);
     const body = JSON.stringify({
         recipient: { id },
         sender_action: senderAction
