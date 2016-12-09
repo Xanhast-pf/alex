@@ -54,7 +54,8 @@ const actions = {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
-            return fbTyping(recipientId, 'typing_on').then(() => fbMessage(recipientId, JSON.parse(text))
+            fbTyping(recipientId, 'typing_on');
+            return fbMessage(recipientId, JSON.parse(text))
                 .then(() => fbTyping(recipientId, 'typing_off'))
                 .catch((err) => {
                     console.error(
@@ -63,7 +64,7 @@ const actions = {
                         ':',
                         err.stack || err
                     );
-                }));
+                });
         } else {
             console.error('Oops! Couldn\'t find user for session:', sessionId);
       // Giving the wheel back to our bot
