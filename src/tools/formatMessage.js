@@ -2,10 +2,32 @@
 import type {
     Element,
     ListTemplate,
-    GenericTemplate
+    GenericTemplate,
+    QuickReplies
 } from 'types';
 
-const textMessage = (text: string) => {
+const textMessage = (text: string, quickReplies?: Array<QuickReplies>) => {
+    if (quickReplies) {
+        const formattedReplies = quickReplies.map((args) => {
+            if (args.content_type === 'text') {
+                if (args.title && args.title.length > 20) {
+                    args.title = args.title.slice(0, 20);
+                }
+
+                if (args.payload && args.payload.length > 1000) {
+                    args.payload = args.payload.slice(0, 1000);
+                }
+            }
+
+            return args;
+        });
+
+        return JSON.stringify({
+            text,
+            quick_replies: formattedReplies
+        });
+    }
+
     return JSON.stringify({ text });
 };
 

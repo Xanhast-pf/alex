@@ -1,4 +1,24 @@
 //  @flow
+//  ------------------------- TEXT MESSAGES ----------------------------------
+export type TextMessage = {
+    text: 'string',
+    quick_replies?: Array<QuickReplies>
+};
+
+export type QuickReplies = QuickReply | QuickReplyLocation;
+
+export type QuickReply = {
+    content_type: 'text',
+    title: string, // 20 chars max. Only if content_type = text
+    payload: string, // 1000 chars max.
+    image_url?: string // If content_type = text. 24x24 Images only
+};
+
+export type QuickReplyLocation = {
+    content_type: 'location',
+    payload: string
+};
+
 // -------------------------- TEMPLATES --------------------------------------
 // GENERIC TEMPLATE
 export type GenericTemplate = {

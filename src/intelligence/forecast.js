@@ -62,7 +62,13 @@ const getForecast = ({ context, entities }: Props): Promise<Context> => {
         } else {
             context = {};
             context.missingLocation = true;
-            context.askLocation = textMessage('Can you tell me the location please?');
+            const quickReply = [
+                {
+                    content_type: 'location',
+                    payload: 'USER_DEFINED_LOCATION'
+                }
+            ];
+            context.askLocation = textMessage('Can you tell me the location please?', quickReply);
             return resolve(context);
         }
     });
