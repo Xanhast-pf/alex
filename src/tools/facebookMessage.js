@@ -24,7 +24,9 @@ const fbMessage = (id: string, message: Object) => {
       });
 };
 
-const fbTyping = (id: string, senderAction: 'typing_on' | 'typing_off') => {
+type SenderAction = 'typing_on' | 'typing_off';
+
+const fbTyping = (id: string, senderAction: SenderAction) => {
     const body = JSON.stringify({
         recipient: { id },
         sender_action: senderAction

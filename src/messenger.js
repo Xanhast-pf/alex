@@ -54,8 +54,8 @@ const actions = {
       // Yay, we found our recipient!
       // Let's forward our bot response to her.
       // We return a promise to let our bot know when we're done sending
-            return fbMessage(recipientId, JSON.parse(text))
-                .then(() => null)
+            return fbTyping(recipientId, 'typing_on').then(() => fbMessage(recipientId, JSON.parse(text))
+                .then(() => fbTyping(recipientId, 'typing_off'))
                 .catch((err) => {
                     console.error(
                         'Oops! An error occurred while forwarding the response: ', JSON.parse(text), ' to',
@@ -63,7 +63,7 @@ const actions = {
                         ':',
                         err.stack || err
                     );
-                });
+                }));
         } else {
             console.error('Oops! Couldn\'t find user for session:', sessionId);
       // Giving the wheel back to our bot
@@ -133,7 +133,6 @@ app.post('/webhook', (req, res) => {
 
                         // Let's forward the message to the Wit.ai Bot Engine
                         // This will run all actions until our bot has nothing left to do
-                        fbTyping(sender, 'typing_on');
                         wit.runActions(
                             sessionId, // the user's current session
                             text, // the user's message
@@ -152,7 +151,6 @@ app.post('/webhook', (req, res) => {
 
                           // Updating the user's current session state
                             sessions[sessionId].context = context;
-                            fbTyping(sender, 'typing_off');
                         })
                         .catch((err) => {
                             console.error('Oops! Got an error from Wit: ', err.stack || err);
