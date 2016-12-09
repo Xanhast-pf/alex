@@ -126,7 +126,10 @@ app.post('/webhook', (req, res) => {
                     if (attachments) {
             // We received an attachment
             // Let's reply with an automatic message
-                        console.log('ATTACHMENT', attachments);
+                        if (attachments.type === 'location') {
+                            console.log('location: ', JSON.stringify(attachments.payload.coordinates))
+                        }
+
                         fbTyping(sender, 'mark_seen')
                             .catch(console.error);
                         fbTyping(sender, 'typing_on')
